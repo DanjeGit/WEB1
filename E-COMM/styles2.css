@@ -1,6 +1,4 @@
-/* ======================== Stylish - Dark Branded Theme ======================== */
-/* This file upgrades your original CSS with clearer variables, layout fixes,
-   responsive tweaks, accessible contrasts, and retains original content layout. */
+/* ======================== Victory SHOP - Dark Branded Theme ======================== */
 
 /* Theme variables */
 :root {
@@ -19,7 +17,8 @@
 html,body { height:100%; }
 body {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(180deg, var(--bg-dark), #080811);
+  /* background: linear-gradient(180deg, var(--bg-dark), #080811); */
+  background: url('images/bg1.avif') no-repeat center center fixed;
   color: var(--text);
   margin:0;
   -webkit-font-smoothing:antialiased;
@@ -109,14 +108,13 @@ a:hover { color: var(--accent-2); text-decoration: none; }
 /* Accessibility: focus visible */
 a:focus, button:focus, input:focus { outline: 3px solid rgba(139,92,246,0.18); outline-offset: 3px; }
 
-/* Extra helpers from original (kept names for compatibility) */
+/*  helpers */
 .img-fluid { max-width:100%; height:auto; }
 
-/* Add small animation for entrance */
+/*   animation for entrance */
 [data-aos] { opacity: 0; transform: translateY(10px); transition: all .6s cubic-bezier(.2,.8,.2,1); }
 [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
 
-/* Preserve some original classes used elsewhere */
 .text-black { color: #000 !important; }
 .fw-bold { font-weight: 700 !important; }
 
@@ -125,7 +123,7 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(139,92,246,0.18); o
 }
 
 #cart-items {
-  display: table-row-group !important; /* default for <tbody> */
+  display: table-row-group !important; 
   border: none !important;
 }
 .price {
@@ -133,4 +131,17 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(139,92,246,0.18); o
     font-weight: 600;
     color: #3714b3;
     margin-top: 0.5rem;
+}
+
+
+
+
+ #cart{
+  border: none !important; 
+  display: block; 
+  box-shadow: none !important; 
+}
+#gallery {
+  background-color: #2f463b !important;
+  margin-top: 18px;
 }
