@@ -1,91 +1,184 @@
-// Define cart variables globally
-const cartItems = [];
-let cartTable, cartTotal, cartCount; // Declare DOM elements globally
+// ====================== GLOBAL CART HANDLER ======================
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let user = JSON.parse(localStorage.getItem("user")) || null;
 
-// Define functions globally
-function updateCart() {
-  if (!cartTable || !cartTotal || !cartCount) return; // Skip if elements aren't available
-
-  cartTable.innerHTML = ''; // Clear the table
-  let total = 0;
-
-  cartItems.forEach((item, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>Ksh ${item.price}</td>
-      <td>
-        <input type="number" class="form-control text-center quantity-input" value="${item.quantity}" min="1" data-index="${index}">
-      </td>
-      <td>Ksh ${item.price * item.quantity}</td>
-      <td>
-        <button class="btn btn-danger btn-sm remove-btn" data-index="${index}">Remove</button>
-      </td>
-    `;
-    cartTable.appendChild(row);
-    total += item.price * item.quantity;
-  });
-
-  cartTotal.textContent = `Ksh ${total}`;
-  cartCount.textContent = cartItems.length; // Update cart count
-
-  // Save updated cart to localStorage
-  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+// Save cart
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// Update the cart icon count globally
+function updateCartCount() {
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  localStorage.setItem("cartCount", count);
+  document.querySelectorAll("#cart-count").forEach(el => (el.textContent = count));
+}
 
+// Load cart 
+document.addEventListener("DOMContentLoaded", () => {
+  const savedCart = JSON.parse(localStorage.getItem("cart"));
+  if (savedCart) cart = savedCart;
+  updateCartCount();
+  updateUserNav();
+});
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Initialize global variables
-  cartTable = document.getElementById('cart-items');
-  cartTotal = document.getElementById('cart-total');
-  cartCount = document.getElementById('cart-count');
+// ====================== USER SESSION ======================
 
-  // Attach event listeners to all "Add to Cart" buttons
-  const buttons = document.querySelectorAll('.btn-accent[data-name][data-price]');
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', function () {
-      const product = {
-        name: btn.getAttribute('data-name'),
-        price: parseInt(btn.getAttribute('data-price'), 10),
-      };
-      addToCart(product);
-    });
-  });
-
-  // Remove product from cart
-  cartTable?.addEventListener('click', function (e) {
-    if (e.target.classList.contains('remove-btn')) {
-      const index = e.target.getAttribute('data-index');
-      cartItems.splice(index, 1);
-      updateCart();
-    }
-  });
-
-  // Update quantity
-  cartTable?.addEventListener('input', function (e) {
-    if (e.target.classList.contains('quantity-input')) {
-      const index = e.target.getAttribute('data-index');
-      const newQuantity = parseInt(e.target.value, 10);
-      if (newQuantity > 0) {
-        cartItems[index].quantity = newQuantity;
-        updateCart();
+// Update nav to show user's name or login
+function updateUserNav() {
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    if (link.textContent.trim().toLowerCase() === "login") {
+      if (user) {
+        link.innerHTML = `<i class="bi bi-person-circle me-1"></i>Hi, ${user.name}`;
+        link.href = "#";
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          showLogoutOption();
+        });
+      } else {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          window.location.href = "auth.html";
+        });
       }
     }
   });
-});
-
-function clickMe(){
-  let message= " Hello there";
-  alert(message)
 }
-function addToCart(product) {
-  const existingProduct = cartItems.find(item => item.name === product.name);
-  if (existingProduct) {
-    existingProduct.quantity += 1;
-  } else {
-    cartItems.push({ ...product, quantity: 1 });
+
+// Show logout confirm dialog
+function showLogoutOption() {
+  if (confirm("Do you want to log out?")) {
+    localStorage.removeItem("user");
+    user = null;
+    alert("You’ve been logged out.");
+    window.location.href = "index2.html";
   }
-  updateCart();
 }
 
+// Save user after signup/login
+function setUserSession(name, email) {
+  user = { name, email };
+  localStorage.setItem("user", JSON.stringify(user));
+  updateUserNav();
+}
+
+// ====================== CART FUNCTIONS ======================
+function addToCart(product = {}) {
+  const existing = cart.find(item => item.name === product.name);
+  if (existing) existing.quantity += 1;
+  else cart.push({ ...product, quantity: 1 });
+  saveCart();
+  updateCartCount();
+  showToast(`${product.name} added to your cart!`);
+}
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.className = "toast-msg position-fixed bottom-0 end-0 mb-3 me-3 p-3 bg-accent text-white rounded shadow";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2500);
+}
+
+// ====================== CART PAGE ======================
+function displayCartItems() {
+  const tbody = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+  if (cart.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" class="text-center py-4">
+          <h5>Your cart is empty.</h5>
+          <a href="index2.html" class="btn btn-accent mt-3">Return to Shop</a>
+        </td>
+      </tr>`;
+    totalEl.textContent = "Ksh 0";
+    return;
+  }
+
+  let total = 0;
+  cart.forEach((item, i) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${item.name}</td>
+      <td>Ksh ${item.price.toLocaleString()}</td>
+      <td>
+        <input type="number" min="1" value="${item.quantity}" data-index="${i}" class="form-control form-control-sm text-center w-50 mx-auto">
+      </td>
+      <td>Ksh ${itemTotal.toLocaleString()}</td>
+      <td><button class="btn btn-danger btn-sm" data-remove="${i}"><i class="bi bi-trash"></i></button></td>`;
+    tbody.appendChild(tr);
+  });
+
+  totalEl.textContent = `Ksh ${total.toLocaleString()}`;
+
+  document.querySelectorAll('[data-index]').forEach(input => {
+    input.addEventListener("change", e => {
+      const idx = e.target.dataset.index;
+      cart[idx].quantity = parseInt(e.target.value);
+      saveCart();
+      displayCartItems();
+      updateCartCount();
+    });
+  });
+
+  document.querySelectorAll('[data-remove]').forEach(btn => {
+    btn.addEventListener("click", e => {
+      const idx = e.target.dataset.remove;
+      cart.splice(idx, 1);
+      saveCart();
+      displayCartItems();
+      updateCartCount();
+    });
+  });
+}
+
+// ====================== CHECKOUT ======================
+function handleCheckout() {
+  const btn = document.getElementById("checkout-btn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    if (cart.length === 0) return alert("Your cart is empty.");
+
+    fetch("https://example-payment-api.com/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cart, user }),
+    })
+      .then(res => res.json())
+      .then(() => {
+        alert("Payment successful! Thank you.");
+        cart = [];
+        saveCart();
+        displayCartItems();
+        updateCartCount();
+      })
+      .catch(() => alert("Payment failed. Please try again."));
+  });
+}
+
+// ====================== INIT ======================
+document.addEventListener("DOMContentLoaded", () => {
+  displayCartItems();
+  handleCheckout();
+
+  // Handle Add to Cart buttons dynamically
+  document.querySelectorAll(".product-card button").forEach(btn => {
+    if (btn.textContent.trim().toLowerCase() === "add to cart") {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".product-card");
+        const name = card.querySelector("h5").textContent.trim();
+        const priceText = card.querySelector(".price")?.textContent.trim() || "Ksh 0";
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, "")); 
+        addToCart({ name, price });
+      });
+    }
+  });
+});

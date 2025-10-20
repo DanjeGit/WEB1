@@ -18,6 +18,14 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+
+  <!-- Inline CSS for Background -->
+  <style>
+    body {
+      background: url('images/bg1.avif') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
 </head>
 
 <body data-bs-theme="dark">
@@ -63,7 +71,7 @@
               <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="auth.html">Login</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="searchToggle" aria-label="Search">
                         <i class="bi bi-search"></i>
@@ -99,7 +107,7 @@
     <div class="container-lg">
         <div class="text-center mb-5">
             <h2 class="fw-bold text-accent">Trending Now</h2>
-            <p class="text-muted">Our most loved and best-selling picks this season</p>
+            <p class="text-muted" id="txt">Our most loved and best-selling picks this season</p>
         </div>
 
         <div class="row g-4">
@@ -109,8 +117,14 @@
                     <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
                     <h5>Elevate Your Drip</h5>
                     <p class="small text-muted">Comfort & style in premium running shoes.</p>
+                    <p class="price">Ksh 1,500</p>
                     <button class="btn btn-accent btn-sm">Buy Now</button>
-                    <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="129" onclick="addToCart({ name: 'Comfortable boots', price: 129 })">Add to Cart</button>
+                    <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                  
+                    
+
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-3">
@@ -119,6 +133,10 @@
                     <h5>Gear Up</h5>
                     <p class="small text-muted">Sportswear made for performance & movement.</p>
                     <button class="btn btn-accent btn-sm">Buy Now</button>
+                    <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="129">
+                        Add to Cart
+                  </button>
+
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-3">
@@ -207,6 +225,8 @@
             <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
             <h5>Urban Motion</h5>
             <p class="small text-muted">Dynamic comfort meets street style.</p>
+             <p class="price">Ksh 1,500</p>
+
           </div>
         </div>
         <div class="col-md-4">
@@ -274,9 +294,6 @@
   <script>
     AOS.init({ duration: 800, once: true });
   </script>
-
+  <script src="js/index.js"></script>
 </body>
 </html>
-  <script src="js/index.js"></script>
-
-</body>

@@ -6,10 +6,10 @@
 :root {
   --bg-dark: #0b1020;
   --panel: #11131b;
-  --muted: #9aa3b2;
+  --muted: #000000;
   --text: #e6eef8;
-  --accent: #6b21a8;      /* electric purple accent - change if desired */
-  --accent-2: #8b5cf6;    /* gradient second */
+  --accent: #6b21a8;      
+  --accent-2: #8b5cf6;    /* gradient  */
   --glass: rgba(255,255,255,0.03);
   --radius: 12px;
 }
@@ -52,14 +52,14 @@ a:hover { color: var(--accent-2); text-decoration: none; }
 }
 .btn-accent:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(107,33,168,0.25); }
 
-/* Outline alternative */
+/* Outline alt */
 .btn-outline-light {
   color: var(--text);
   border: 1px solid rgba(255,255,255,0.06);
   background: transparent;
 }
 
-/* Hero */
+/* Hero section */
 .hero {
   padding-top: 5rem;
   padding-bottom: 6rem;
@@ -86,7 +86,7 @@ a:hover { color: var(--accent-2); text-decoration: none; }
 .product-desc { color: var(--muted); font-size: .95rem; }
 
 /* Modal overrides */
-.modal-content.bg-dark { background: linear-gradient(180deg, #0e1116, #0c0d12); border-radius: 12px; color: var(--text); }
+.modal-content.bg-dark { background: linear-gradient(180deg, #0e1116, #7e8296); border-radius: 12px; color: var(--text); }
 
 /* Search overlay */
 .search-overlay { background: rgba(4,8,16,0.85); padding-top: 3rem; padding-bottom:3rem; }
@@ -119,3 +119,7 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(139,92,246,0.18); o
 /* Preserve some original classes used elsewhere */
 .text-black { color: #000 !important; }
 .fw-bold { font-weight: 700 !important; }
+
+#txt {
+    color: #000000;
+}
