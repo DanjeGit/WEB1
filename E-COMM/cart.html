@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Victory SHOE SHOP | Step Into Fashion</title>
+  <meta name="description" content="Victory SHOE SHOP - Shoes & Fashion Store" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles2.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- HEADER -->
+  <header id="siteHeader" class="site-header border-bottom bg-dark">
+    <div class="header-top py-2 text-muted">
+      <div class="container-lg d-flex justify-content-between align-items-center small">
+        <span><i class="bi bi-telephone me-2"></i>Call us: (+254) 0725871820 / 0787123634</span>
+        <ul class="social-links list-unstyled d-flex gap-3 mb-0">
+          <li><a href="#" class="text-muted"><i class="bi bi-facebook"></i></a></li>
+          <li><a href="#" class="text-muted"><i class="bi bi-instagram"></i></a></li>
+          <li><a href="#" class="text-muted"><i class="bi bi-twitter"></i></a></li>
+          <li><a href="#" class="text-muted"><i class="bi bi-youtube"></i></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3">
+      <div class="container-lg">
+        <a class="navbar-brand fw-bold text-accent" href="#">
+          <img src="images/main-logo.jpg" alt="Stylish logo" style="height:48px; border-radius:8px;" class="me-2">VICTORY SHOE SHOP
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="bdNavbar">
+          <div class="offcanvas-header">
+            <h5>Menu</h5>
+            <button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active" href="index2.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Men</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
+              <li class="nav-item"><a class="nav-link" href="index2.html">Shop</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="searchToggle" aria-label="Search">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li>
+
+              <li class="nav-item">
+                <a class="nav-link position-relative" href="cart.html"  aria-label="Shopping Cart">
+                  <i class="bi bi-cart3"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-accent" id="cart-count">0</span>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- cart page -->
+<section id="cart" class="py-5">
+  <div class="container-lg">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-accent">Your Cart</h2>
+      <p class="text-muted">Review your selected items and proceed to checkout</p>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Dynamic rows will be added here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <h4 class="fw-bold">Total: <span id="cart-total">Ksh 0</span></h4>
+      <button class="btn btn-accent btn-lg" id="checkout-btn">Checkout</button>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer mt-5 py-4 text-light" style="background: linear-gradient(90deg, rgba(75,0,130,0.95), rgba(105,0,160,0.95));">
+    <div class="container-lg">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <img src="images/main-logo.jpg" alt="logo" style="height:36px; border-radius:6px;">
+          <p class="mb-0 small mt-2">© 2025 Stylish. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="text-light"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/index.js"></script>
+</body>
