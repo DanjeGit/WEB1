@@ -28,6 +28,9 @@ function updateCart() {
 
   cartTotal.textContent = `Ksh ${total}`;
   cartCount.textContent = cartItems.length; // Update cart count
+
+  // Save updated cart to localStorage
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
 
 
