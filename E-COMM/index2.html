@@ -66,9 +66,7 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Men</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> 
               <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
               <li class="nav-item"><a class="nav-link" href="auth.html">Login</a></li>
@@ -95,7 +93,7 @@
       <h1 class="display-4 fw-bold">Step into Style & Comfort</h1>
       <p class="lead text-muted">Discover premium shoes, trendy wear, and fashion accessories designed for every lifestyle.</p>
       <div class="mt-4">
-        <a href="#collection" class="btn btn-accent btn-lg me-3" onclick="addToCart()">Shop Now</a>
+        <a href="#collection" class="btn btn-accent btn-lg me-3">Shop Now</a>
         <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
       </div>
     </div>
@@ -104,93 +102,179 @@
 
   <!-- INTRO / PRODUCTS -->
 <section id="collection" class="py-5" data-aos="fade-up">
-    <div class="container-lg">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-accent">Trending Now</h2>
-            <p class="text-muted" id="txt">Our most loved and best-selling picks this season</p>
-        </div>
-
-        <div class="row g-4">
-            <!-- Row 1 -->
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
-                    <h5>Elevate Your Drip</h5>
-                    <p class="small text-muted">Comfort & style in premium running shoes.</p>
-                    <p class="price">Ksh 1,500</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                    <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
-                        Add to Cart
-                  </button>
-                  
-                    
-
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Sports Wear">
-                    <h5>Gear Up</h5>
-                    <p class="small text-muted">Sportswear made for performance & movement.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                    <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="129">
-                        Add to Cart
-                  </button>
-
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Fashion Shoes">
-                    <h5>Step into Fashion</h5>
-                    <p class="small text-muted">Trendy shoes that make a statement.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Sneakers">
-                    <h5>Everyday Comfort</h5>
-                    <p class="small text-muted">Stylish sneakers for all-day wear.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-            
-            <!-- Row 2 -->
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Casual Shoes">
-                    <h5>Weekend Vibes</h5>
-                    <p class="small text-muted">Casual shoes for your weekend adventures.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Formal Shoes">
-                    <h5>Business Class</h5>
-                    <p class="small text-muted">Elegant footwear for professional settings.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Hiking Shoes">
-                    <h5>Trail Explorer</h5>
-                    <p class="small text-muted">Durable hiking shoes for outdoor enthusiasts.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="product-card text-center p-3 h-100">
-                    <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Fashion Boots">
-                    <h5>Urban Edge</h5>
-                    <p class="small text-muted">Trendy boots to complete your look.</p>
-                    <button class="btn btn-accent btn-sm">Buy Now</button>
-                </div>
-            </div>
-        </div>
+  <div class="container-lg">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-accent">Trending Now</h2>
+      <p class="txt" id="txt">Our most loved and best-selling picks this season</p>
     </div>
+
+    <div class="row g-4">
+      <!-- Product 1 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Sports Wear">
+          <h5>Gear Up</h5>
+          <p class="small text-muted">Sportswear made for performance & movement.</p>
+          <button class="btn btn-accent btn-sm" data-name="Gear Up" data-price="1299">Add to Cart</button>
+          <p class="price">Ksh 1,299</p>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
+          <h5>Elevate Your Drip</h5>
+          <p class="small text-muted">Comfort & style in premium running shoes.</p>
+          <button class="btn btn-accent btn-sm" data-name="Elevate Your Drip" data-price="1500">Add to Cart</button>
+          <p class="price">Ksh 1,500</p>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Fashion Shoes">
+          <h5>Step into Fashion</h5>
+          <p class="small text-muted">Trendy shoes that make a statement.</p>
+          <button class="btn btn-accent btn-sm" data-name="Step into Fashion" data-price="1800">Add to Cart</button>
+          <p class="price">Ksh 1,800</p>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Casual Shoes">
+          <h5>Weekend Vibes</h5>
+          <p class="small text-muted">Casual shoes for your weekend adventures.</p>
+          <button class="btn btn-accent btn-sm" data-name="Weekend Vibes" data-price="1400">Add to Cart</button>
+          <p class="price">Ksh 1,400</p>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Formal Shoes">
+          <h5>Business Class</h5>
+          <p class="small text-muted">Elegant footwear for professional settings.</p>
+          <button class="btn btn-accent btn-sm" data-name="Business Class" data-price="2000">Add to Cart</button>
+          <p class="price">Ksh 2,000</p>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Hiking Shoes">
+          <h5>Trail Explorer</h5>
+          <p class="small text-muted">Durable hiking shoes for outdoor enthusiasts.</p>
+          <button class="btn btn-accent btn-sm" data-name="Trail Explorer" data-price="1700">Add to Cart</button>
+          <p class="price">Ksh 1,700</p>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Fashion Boots">
+          <h5>Urban Edge</h5>
+          <p class="small text-muted">Trendy boots to complete your look.</p>
+          <button class="btn btn-accent btn-sm" data-name="Urban Edge" data-price="1900">Add to Cart</button>
+          <p class="price">Ksh 1,900</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Sports Wear">
+          <h5>Gear Up</h5>
+          <p class="small text-muted">Sportswear made for performance & movement.</p>
+          <button class="btn btn-accent btn-sm" data-name="Gear Up" data-price="1299">Add to Cart</button>
+          <p class="price">Ksh 1,299</p>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
+          <h5>Elevate Your Drip</h5>
+          <p class="small text-muted">Comfort & style in premium running shoes.</p>
+          <button class="btn btn-accent btn-sm" data-name="Elevate Your Drip" data-price="1500">Add to Cart</button>
+          <p class="price">Ksh 1,500</p>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Fashion Shoes">
+          <h5>Step into Fashion</h5>
+          <p class="small text-muted">Trendy shoes that make a statement.</p>
+          <button class="btn btn-accent btn-sm" data-name="Step into Fashion" data-price="1800">Add to Cart</button>
+          <p class="price">Ksh 1,800</p>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Casual Shoes">
+          <h5>Weekend Vibes</h5>
+          <p class="small text-muted">Casual shoes for your weekend adventures.</p>
+          <button class="btn btn-accent btn-sm" data-name="Weekend Vibes" data-price="1400">Add to Cart</button>
+          <p class="price">Ksh 1,400</p>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Formal Shoes">
+          <h5>Business Class</h5>
+          <p class="small text-muted">Elegant footwear for professional settings.</p>
+          <button class="btn btn-accent btn-sm" data-name="Business Class" data-price="2000">Add to Cart</button>
+          <p class="price">Ksh 2,000</p>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Hiking Shoes">
+          <h5>Trail Explorer</h5>
+          <p class="small text-muted">Durable hiking shoes for outdoor enthusiasts.</p>
+          <button class="btn btn-accent btn-sm" data-name="Trail Explorer" data-price="1700">Add to Cart</button>
+          <p class="price">Ksh 1,700</p>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Fashion Boots">
+          <h5>Urban Edge</h5>
+          <p class="small text-muted">Trendy boots to complete your look.</p>
+          <button class="btn btn-accent btn-sm" data-name="Urban Edge" data-price="1900">Add to Cart</button>
+          <p class="price">Ksh 1,900</p>
+        </div>
+      </div>
+
+
+      <!-- Product 8 -->
+      <div class="col-6 col-sm-6 col-md-3">
+        <div class="product-card text-center p-3 h-100">
+          <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Luxury Shoes">
+          <h5>Luxury Fit</h5>
+          <p class="small text-muted">Experience elegance with comfort.</p>
+          <button class="btn btn-accent btn-sm" data-name="Luxury Fit" data-price="2500">Add to Cart</button>
+          <p class="price">Ksh 2,500</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
   </section>
 
@@ -225,7 +309,10 @@
             <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Running Shoes">
             <h5>Urban Motion</h5>
             <p class="small text-muted">Dynamic comfort meets street style.</p>
-             <p class="price">Ksh 1,500</p>
+             <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
 
           </div>
         </div>
@@ -234,6 +321,10 @@
             <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Street Wear">
             <h5>Bold Edition</h5>
             <p class="small text-muted">Bright hues for confident steps.</p>
+            <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -241,6 +332,10 @@
             <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Fashion Shoes">
             <h5>Midnight Flex</h5>
             <p class="small text-muted">Lightweight form. Endless comfort.</p>
+            <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
           </div>
         </div>
 
@@ -250,6 +345,10 @@
             <img src="images/card-image2.jpg" class="img-fluid rounded mb-3" alt="Sneakers">
             <h5>Classic Runner</h5>
             <p class="small text-muted">Timeless design meets durability.</p>
+            <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -257,6 +356,10 @@
             <img src="images/card-image1.jpg" class="img-fluid rounded mb-3" alt="Shoes">
             <h5>Essential Active</h5>
             <p class="small text-muted">Perfect for your daily fitness routine.</p>
+            <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -264,6 +367,10 @@
             <img src="images/card-image3.jpg" class="img-fluid rounded mb-3" alt="Sneakers">
             <h5>Luxury Fit</h5>
             <p class="small text-muted">Experience elegance with comfort.</p>
+            <button class="btn btn-accent btn-sm" data-name="Comfortable boots" data-price="1500">
+                        Add to Cart
+                  </button>
+                   <p class="price">Ksh 1,500</p>
           </div>
         </div>
       </div>

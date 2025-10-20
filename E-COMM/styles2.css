@@ -4,7 +4,7 @@
 
 /* Theme variables */
 :root {
-  --bg-dark: #0b1020;
+  --bg-dark: #3e4868;
   --panel: #11131b;
   --muted: #000000;
   --text: #e6eef8;
@@ -121,5 +121,16 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(139,92,246,0.18); o
 .fw-bold { font-weight: 700 !important; }
 
 #txt {
-    color: #000000;
+  color: #ffffff;
+}
+
+#cart-items {
+  display: table-row-group !important; /* default for <tbody> */
+  border: none !important;
+}
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3714b3;
+    margin-top: 0.5rem;
 }
