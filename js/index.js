@@ -93,7 +93,7 @@ function displayCartItems() {
       <tr>
         <td colspan="5" class="text-center py-4">
           <h5>Your cart is empty.</h5>
-          <a href="index2.html" class="btn btn-accent mt-3">Return to Shop</a>
+          <a href="index.html" class="btn btn-accent mt-3">Return to Shop</a>
         </td>
       </tr>`;
     totalEl.textContent = "Ksh 0";
