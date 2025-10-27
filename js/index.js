@@ -182,3 +182,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+// ====================== FLASH SALE TIMER ======================
+  function startFlashSaleTimer() {
+    const timerElement = document.getElementById('flashsale-timer');
+    let hours = 3;
+    let minutes =59;
+    let seconds = 59;
+
+    function updateTimer() {
+      seconds--;
+      if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+      }
+      if (minutes < 0) {
+        minutes = 59;
+        hours--;
+      }
+      if (hours < 0) {
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+      }
+
+      timerElement.textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+    }
+
+    setInterval(updateTimer, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', startFlashSaleTimer);
