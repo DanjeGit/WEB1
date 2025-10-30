@@ -1,3 +1,4 @@
+// js/index.js
 // ====================== GLOBAL CART HANDLER ======================
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let user = JSON.parse(localStorage.getItem("user")) || null;
@@ -20,6 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedCart) cart = savedCart;
   updateCartCount();
   updateUserNav();
+  // wire up dynamic buttons after Victory.js created markup
+  wireProductButtons();
+  setupSearch();
+  displayCartItems();
+  handleCheckout();
 });
 
 // ====================== USER SESSION ======================
@@ -28,7 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateUserNav() {
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach(link => {
-    if (link.textContent.trim().toLowerCase() === "login") {
+    if (link.textContent.trim().toLowerCase() === "login" || link.href?.includes("auth.html")) {
+      // remove previous listener to avoid duplicates
+      const clone = link.cloneNode(true);
+      link.parentNode.replaceChild(clone, link);
+    }
+  });
+
+  // re-query
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.textContent.trim().toLowerCase() === "login" || link.href?.includes("auth.html")) {
       if (user) {
         link.innerHTML = `<i class="bi bi-person-circle me-1"></i>Hi, ${user.name}`;
         link.href = "#";
@@ -52,7 +67,8 @@ function showLogoutOption() {
     localStorage.removeItem("user");
     user = null;
     alert("You’ve been logged out.");
-    window.location.href = "index2.html";
+    updateUserNav();
+    window.location.href = "index.html";
   }
 }
 
@@ -64,10 +80,14 @@ function setUserSession(name, email) {
 }
 
 // ====================== CART FUNCTIONS ======================
-function addToCart(product = {}) {
-  const existing = cart.find(item => item.name === product.name);
-  if (existing) existing.quantity += 1;
-  else cart.push({ ...product, quantity: 1 });
+function addToCart(product = {}, quantity = 1) {
+  const existing = cart.find(item => item.id === product.id);
+  if (existing) {
+    existing.quantity += quantity;
+    if (product.stock && existing.quantity > product.stock) existing.quantity = product.stock;
+  } else {
+    cart.push({ ...product, quantity });
+  }
   saveCart();
   updateCartCount();
   showToast(`${product.name} added to your cart!`);
@@ -112,7 +132,7 @@ function displayCartItems() {
         <input type="number" min="1" value="${item.quantity}" data-index="${i}" class="form-control form-control-sm text-center w-50 mx-auto">
       </td>
       <td>Ksh ${itemTotal.toLocaleString()}</td>
-      <td><button class="btn btn-danger btn-sm" data-remove="${i}"><i class="bi bi-trash"></i></button></td>`;
+      <td><button class="btn btn-danger btn-sm remove-btn" data-index="${i}"><i class="bi bi-trash"></i></button></td>`;
     tbody.appendChild(tr);
   });
 
@@ -120,17 +140,22 @@ function displayCartItems() {
 
   document.querySelectorAll('[data-index]').forEach(input => {
     input.addEventListener("change", e => {
-      const idx = e.target.dataset.index;
-      cart[idx].quantity = parseInt(e.target.value);
+      const idx = parseInt(e.target.dataset.index, 10);
+      const newVal = parseInt(e.target.value, 10);
+      if (isNaN(newVal) || newVal < 1) {
+        e.target.value = cart[idx].quantity;
+        return;
+      }
+      cart[idx].quantity = newVal;
       saveCart();
       displayCartItems();
       updateCartCount();
     });
   });
 
-  document.querySelectorAll('[data-remove]').forEach(btn => {
+  document.querySelectorAll('.remove-btn').forEach(btn => {
     btn.addEventListener("click", e => {
-      const idx = e.target.dataset.remove;
+      const idx = parseInt(e.currentTarget.dataset.index, 10);
       cart.splice(idx, 1);
       saveCart();
       displayCartItems();
@@ -147,68 +172,106 @@ function handleCheckout() {
   btn.addEventListener("click", () => {
     if (cart.length === 0) return alert("Your cart is empty.");
 
-    fetch("https://example-payment-api.com/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart, user }),
-    })
-      .then(res => res.json())
-      .then(() => {
-        alert("Payment successful! Thank you.");
-        cart = [];
-        saveCart();
-        displayCartItems();
-        updateCartCount();
-      })
-      .catch(() => alert("Payment failed. Please try again."));
+    // For real production: replace with secure server checkout integration (Stripe / PayPal)
+    // Here we simulate successful checkout
+    alert("Payment simulated. Thank you.");
+    cart = [];
+    saveCart();
+    displayCartItems();
+    updateCartCount();
   });
 }
 
-// ====================== INIT ======================
-document.addEventListener("DOMContentLoaded", () => {
-  displayCartItems();
-  handleCheckout();
+// ====================== DYNAMIC BUTTONS + SEARCH ======================
+function wireProductButtons() {
+  // Delegate add-to-cart clicks (works for dynamically created elements)
+  document.body.addEventListener("click", function (e) {
+    const addBtn = e.target.closest(".add-to-cart");
+    if (addBtn) {
+      const id = addBtn.dataset.id;
+      const product = products.find(p => p.id === id) || featuredCollections.find(p => p.id === id);
+      if (!product) return showToast("Product not found.");
+      if (product.stock === 0) return alert("This product is out of stock.");
+      addToCart(product, 1);
+      return;
+    }
 
-  // Handle Add to Cart buttons dynamically
-  document.querySelectorAll(".product-card button").forEach(btn => {
-    if (btn.textContent.trim().toLowerCase() === "add to cart") {
-      btn.addEventListener("click", () => {
-        const card = btn.closest(".product-card");
-        const name = card.querySelector("h5").textContent.trim();
-        const priceText = card.querySelector(".price")?.textContent.trim() || "Ksh 0";
-        const price = parseFloat(priceText.replace(/[^0-9.]/g, "")); 
-        addToCart({ name, price });
-      });
+    const viewBtn = e.target.closest(".view-product") || e.target.closest(".product-thumb") || e.target.closest(".product-card");
+    if (viewBtn) {
+      const id = viewBtn.dataset.id || viewBtn.closest?.('[data-id]')?.dataset?.id;
+      if (!id) return;
+      window.location.href = `product.html?id=${encodeURIComponent(id)}`;
     }
   });
-});
-// ====================== FLASH SALE TIMER ======================
-  function startFlashSaleTimer() {
-    const timerElement = document.getElementById('flashsale-timer');
-    let hours = 3;
-    let minutes =59;
-    let seconds = 59;
+}
 
-    function updateTimer() {
-      seconds--;
-      if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-      }
-      if (minutes < 0) {
-        minutes = 59;
-        hours--;
-      }
-      if (hours < 0) {
-        hours = 0;
-        minutes = 0;
-        seconds = 0;
-      }
+// SEARCH overlay and logic
+function setupSearch() {
+  const searchToggle = document.getElementById("searchToggle");
+  if (!searchToggle) return;
 
-      timerElement.textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+  searchToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    // If already exists, focus input
+    let overlay = document.getElementById("search-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "search-overlay";
+      overlay.style = `
+        position: fixed; inset: 0; background: rgba(4,8,16,0.9); z-index: 1050;
+        display:flex; align-items:start; justify-content:center; padding: 60px 20px;
+      `;
+      overlay.innerHTML = `
+        <div style="max-width:900px; width:100%">
+          <div class="input-group mb-3">
+            <input id="site-search-input" type="search" class="form-control form-control-lg search-input" placeholder="Search products, brands..." aria-label="Search">
+            <button id="close-search" class="btn btn-outline-light">Close</button>
+          </div>
+          <div id="search-results" class="row g-3"></div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      document.getElementById("close-search").addEventListener("click", () => overlay.remove());
+      const input = document.getElementById("site-search-input");
+      input.addEventListener("input", handleSearchInput);
+      input.focus();
+    } else {
+      const input = document.getElementById("site-search-input");
+      input?.focus();
+    }
+  });
+
+  function handleSearchInput(e) {
+    const q = e.target.value.trim().toLowerCase();
+    const resultsEl = document.getElementById("search-results");
+    resultsEl.innerHTML = "";
+    if (!q) return;
+    const all = [...products, ...featuredCollections];
+    const matches = all.filter(p => {
+      return p.name.toLowerCase().includes(q) ||
+             (p.brand && p.brand.toLowerCase().includes(q)) ||
+             (p.desc && p.desc.toLowerCase().includes(q));
+    });
+
+    if (matches.length === 0) {
+      resultsEl.innerHTML = `<div class="col-12 text-center text-muted">No results for "${q}"</div>`;
+      return;
     }
 
-    setInterval(updateTimer, 1000);
+    resultsEl.innerHTML = matches.map(p => `
+      <div class="col-12 col-md-6">
+        <div class="product-card d-flex gap-3 align-items-center">
+          <img src="${p.url}" style="width:96px; height:72px; object-fit:cover; border-radius:8px;">
+          <div>
+            <h6 style="margin:0">${p.name}</h6>
+            <div class="small text-muted">${p.brand} • Ksh ${p.price}</div>
+            <div class="mt-2">
+              <button class="btn btn-sm btn-outline-light view-product" data-id="${p.id}">View</button>
+              <button class="btn btn-sm btn-accent add-to-cart" data-id="${p.id}">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
   }
-
-  document.addEventListener('DOMContentLoaded', startFlashSaleTimer);
+}
