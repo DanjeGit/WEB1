@@ -244,7 +244,7 @@ function setupSearch() {
   function handleSearchInput(e) {
     const q = e.target.value.trim().toLowerCase();
     const resultsEl = document.getElementById("search-results");
-    resultsEl.innerHTML = "";
+    resultsEl.innerHTML = ""; 
     if (!q) return;
     const all = [...products, ...featuredCollections];
     const matches = all.filter(p => {

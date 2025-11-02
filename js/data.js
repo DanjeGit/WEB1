@@ -1,5 +1,5 @@
-const products = [
-  { id: "p001", name: "Author Touch", brand: "WriteStyle", desc: "Sleek and modern author-inspired footwear.", url: "images/author-item.jpg", price: 1300, stock: 18 },
+ const products = [
+  { id: "p001", name: "Author Touch", brand: "WriteStyle", desc: "Sleek and modern author-inspired footwear.", url: "images/author-item.jpg", price: 1000, stock: 18 },
   { id: "p002", name: "Bold Vision", brand: "Cardio", desc: "Classic comfort reimagined for all-day wear.", url: "images/card-image1.jpg", price: 1400, stock: 20 },
   { id: "p003", name: "Urban Flow", brand: "StepRight", desc: "Dynamic sneakers designed for comfort and motion.", url: "images/card-image3.jpg", price: 1450, stock: 15 },
   { id: "p004", name: "Trail Motion", brand: "PeakFit", desc: "Engineered for grip and durability in every stride.", url: "images/card-image5.jpg", price: 1550, stock: 10 },
@@ -38,8 +38,10 @@ const products = [
   { id: "p031", name: "Product Supreme", brand: "SoloFit", desc: "Premium finish, crafted to perfection.", url: "images/single-product-thumb2.jpg", price: 1900, stock: 6 },
 ];
 
-const featuredCollections = [
+ const featuredCollections = [
   { id: "f001", name: "Victory Glide", brand: "Victory", desc: "Lightweight comfort for your daily adventures.", url: "images/card-large-item8.jpg", price: 1800, stock: 5 },
   { id: "f002", name: "Urban Motion", brand: "StreetX", desc: "Where design meets effortless movement.", url: "images/post-item3.jpg", price: 1500, stock: 12 },
   { id: "f003", name: "Prestige Prime", brand: "SoloFit", desc: "Timeless luxury and next-level performance.", url: "images/single-product-thumb2.jpg", price: 1900, stock: 6 },
 ];
+
+// module.exports = { products, featuredCollections };

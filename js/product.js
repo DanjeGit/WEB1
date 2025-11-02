@@ -1,3 +1,4 @@
+
 // js/product.js
 function getQueryParam(name) {
   const url = new URL(window.location.href);
